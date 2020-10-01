@@ -3,12 +3,12 @@ read more https://en.wikipedia.org/wiki/Perlin_noise
 
 
 noise = PerlinNoise(n_dims=2, octaves=3.5, seed=777)  
-<md-tabs>>n_dims : positive int, optional, default = 1  
-       <md-tabs><md-tabs>space dimension  
-   <md-tabs>octaves : positive float, obtional, default = 1  
-       <md-tabs><md-tabs>positive number of sub rectangles in each [0, 1] range  
-   <md-tabs>seed : positive int, optional, default = None  
-       <md-tabs><md-tabs>specific seed with which you want to initialize random generator  
+&nbsp;&nbsp;n_dims : positive int, optional, default = 1  
+     &nbsp;&nbsp;&nbsp;&nbsp;space dimension  
+ &nbsp;&nbsp;octaves : positive float, obtional, default = 1  
+     &nbsp;&nbsp;&nbsp;&nbsp;positive number of sub rectangles in each [0, 1] range  
+ &nbsp;&nbsp;seed : positive int, optional, default = None  
+     &nbsp;&nbsp;&nbsp;&nbsp;specific seed with which you want to initialize random generator  
 
 Usage examples:
 ```python
