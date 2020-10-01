@@ -40,6 +40,7 @@ class RandVec:
             random.setstate(st)
 
         norm = math.sqrt(RandVec._dot(vec, vec))
+        norm = math.sqrt(len(vec))
         vec = [math.sqrt(len(vec))*v/norm for v in vec]
         return vec
 
