@@ -5,7 +5,7 @@ read more https://en.wikipedia.org/wiki/Perlin_noise
 noise = PerlinNoise(n_dims=2, octaves=3.5, seed=777)  
 &nbsp;&nbsp;&nbsp;&nbsp;n_dims : positive int, optional, default = 1  
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;space dimension  
- &nbsp;&nbsp;&nbsp;&nbsp;octaves : positive float, obtional, default = 1  
+ &nbsp;&nbsp;&nbsp;&nbsp;octaves : positive float, optional, default = 1  
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;positive number of sub rectangles in each [0, 1] range  
  &nbsp;&nbsp;&nbsp;&nbsp;seed : positive int, optional, default = None  
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;specific seed with which you want to initialize random generator  
@@ -34,10 +34,10 @@ plt.show()
 import matplotlib.pyplot as plt
 from perlin_noise import PerlinNoise
 
-noise1 = PerlinNoise(n_dims=2, octaves=1)
-noise2 = PerlinNoise(n_dims=2, octaves=2)
-noise3 = PerlinNoise(n_dims=2, octaves=4)
-noise4 = PerlinNoise(n_dims=2, octaves=8)
+noise1 = PerlinNoise(n_dims=2, octaves=0.5)
+noise2 = PerlinNoise(n_dims=2, octaves=1)
+noise3 = PerlinNoise(n_dims=2, octaves=2)
+noise4 = PerlinNoise(n_dims=2, octaves=4)
 
 xpix = 100
 ypix = 100
