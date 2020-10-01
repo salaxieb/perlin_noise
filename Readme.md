@@ -57,4 +57,4 @@ plt.imshow(pic, cmap='gray')
 plt.show()
 ```
 
-![png](pics/output_4_0.png)
+![png](pics/output_5_0.png)
