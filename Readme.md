@@ -2,13 +2,13 @@ Smooth random noise generator
 read more https://en.wikipedia.org/wiki/Perlin_noise  
 
 
-noise = PerlinNoise(n_dims=2, octaves=3.5, seed=777)**
-   n_dims : positive int, optional, default = 1
-       space dimension
-   octaves : positive float, obtional, default = 1
-       positive number of sub rectangles in each [0, 1] range
-   seed : positive int, optional, default = None
-       specific seed with which you want to initialize random generator
+noise = PerlinNoise(n_dims=2, octaves=3.5, seed=777)  
+  <span>n_dims : positive int, optional, default = 1  
+       <span><span>space dimension  
+   <span>octaves : positive float, obtional, default = 1  
+       <span><span>positive number of sub rectangles in each [0, 1] range  
+   <span><span>seed : positive int, optional, default = None  
+       <span><span>specific seed with which you want to initialize random generator  
 
 Usage examples:
 ```python
