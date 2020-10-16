@@ -1,3 +1,8 @@
 /dist/
 /perlin_noise.egg-info/
 setup.cfg
+/ENV/
+/__pycache__/
+/tests/__pycache__/
+/.pytest_cache/
+/perlin_noise/__pycache__/
