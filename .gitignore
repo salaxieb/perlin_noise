@@ -6,3 +6,5 @@ setup.cfg
 /tests/__pycache__/
 /.pytest_cache/
 /perlin_noise/__pycache__/
+perlin.ipynb
+/.ipynb_checkpoints/

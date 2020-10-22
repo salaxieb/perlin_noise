@@ -2,20 +2,27 @@ Smooth random noise generator
 read more https://en.wikipedia.org/wiki/Perlin_noise  
 
 
-noise = PerlinNoise(n_dims=2, octaves=3.5, seed=777)  
-&nbsp;&nbsp;&nbsp;&nbsp;n_dims : positive int, optional, default = 1  
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;space dimension  
- &nbsp;&nbsp;&nbsp;&nbsp;octaves : positive float, optional, default = 1  
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;positive number of sub rectangles in each [0, 1] range  
- &nbsp;&nbsp;&nbsp;&nbsp;seed : positive int, optional, default = None  
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;specific seed with which you want to initialize random generator  
+noise = PerlinNoise(octaves=3.5, seed=777)  
+ &nbsp;&nbsp;&nbsp;&nbsp;octaves : number of sub rectangles in each [0, 1] range
+ &nbsp;&nbsp;&nbsp;&nbsp;seed : specific seed with which you want to initialize random generator  
 
-Usage examples:
+
+```python
+noise = PerlinNoise()
+# accepts as argument intenger and list
+noise(0.5) == noise([0.5])
+--> True
+# noise not limited in space dimension and seamless in any space size
+noise([0.5, 0.5]) == noise([0.5, 0.5, 0, 0, 0])
+--> True
+```
+
+Visualization examples:
 ```python
 import matplotlib.pyplot as plt
 from perlin_noise import PerlinNoise
 
-noise = PerlinNoise(n_dims=2, octaves=2)
+noise = PerlinNoise(octaves=3)
 xpix = 100
 ypix = 100
 pic = []
@@ -34,10 +41,10 @@ plt.show()
 import matplotlib.pyplot as plt
 from perlin_noise import PerlinNoise
 
-noise1 = PerlinNoise(n_dims=2, octaves=0.5)
-noise2 = PerlinNoise(n_dims=2, octaves=1)
-noise3 = PerlinNoise(n_dims=2, octaves=2)
-noise4 = PerlinNoise(n_dims=2, octaves=4)
+noise1 = PerlinNoise(octaves=3)
+noise2 = PerlinNoise(octaves=6)
+noise3 = PerlinNoise(octaves=12)
+noise4 = PerlinNoise(octaves=24)
 
 xpix = 100
 ypix = 100

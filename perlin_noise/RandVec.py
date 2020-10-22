@@ -10,7 +10,7 @@ class RandVec:
         self.vec = self.sample_vector(dimensions=len(self.coordinates), seed=seed)
 
     def dists_to(self, coordinates):
-        dists = list(map(lambda x: x[0]-x[1], zip(coordinates, self.coordinates)))
+        dists = [x[0]-x[1] for x in zip(coordinates, self.coordinates)]
         return dists
 
     def multiply_arr(self, arr):

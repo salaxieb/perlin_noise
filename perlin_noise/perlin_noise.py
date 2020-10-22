@@ -6,21 +6,15 @@ class PerlinNoise:
     Smooth random noise generator
     read more https://en.wikipedia.org/wiki/Perlin_noise
     """
-    def __init__(self, n_dims=1, octaves=1, seed=None):
+    def __init__(self, octaves=1, seed=None):
         """
             Perlin Noise object initialisation class
             ex.: noise = PerlinNoise(n_dims=2, octaves=3.5, seed=777)
-            n_dims : positive int, optional, default = 1
-                space dimension
             octaves : positive float, obtional, default = 1
                 positive number of sub rectangles in each [0, 1] range
             seed : positive int, optional, default = None
                 specific seed with which you want to initialize random generator
         """
-        try:
-            assert type(n_dims) == int and n_dims > 0
-        except AssertionError:
-            raise ValueError(f'n_dims expected to be positive integer number, but you passed: {n_dims}')
 
         try:
             assert octaves > 0
@@ -33,7 +27,6 @@ class PerlinNoise:
         except AssertionError:
             raise ValueError(f'seed expected to be positive integer number, but you passed: {seed}')
 
-        self.n_dims = n_dims
         self.octaves = octaves
         if seed:
             self.seed = seed
@@ -45,7 +38,7 @@ class PerlinNoise:
         hashes coordinates to integer number to avoid repeats in seed
         coors - array of coordinates
         """
-        return max(1, abs(RandVec._dot([10^p for p in range(len(coors))], coors)+1))
+        return max(1, abs(RandVec._dot([10**p for p in range(len(coors))], coors)+1))
 
     @staticmethod
     def _is_iterable(obj):
@@ -62,26 +55,12 @@ class PerlinNoise:
         internal function that checks if given coordinates are valid
         """
         if type(coordinates) == int or type(coordinates) == float:
-            if self.n_dims == 1:
-                return
-            else:
-                raise TypeError('if n_dims > 1 coordinates must be iterable of coordinates')
+            return
         else:
-            if self._is_iterable(coordinates):
-                if len(list(coordinates)) == self.n_dims:
-                    return
-                else:
-                    raise TypeError(f'''
-                                    coordinates must be iterable (np.array, list, map ..)
-                                    with len(coordinates) = n_dims,
-                                    but you passed coordinates with length {len(coordinates)}
-                                    and n_dims = {self.n_dims}''')
-            else:
+            if not self._is_iterable(coordinates):
                 raise TypeError(f'''
                                 coordinates must be iterable (np.array, list, map ..)
-                                with len(coordinates) = n_dims,
                                 but you passed not iterable coordinates of type {type(coordinates)}''')
-
 
     @staticmethod
     def _each_with_each(arrs, prev=(), results=[]):
@@ -100,7 +79,7 @@ class PerlinNoise:
     def noise(self, coordinates):
         """
         basic function that returns noise value for given coordinates
-        coordinates - integer if n_dims==1 or list of coordinates with length = n_dims
+        coordinates - integer or list of coordinates
         """
         self._is_valid_coordinates(coordinates)
 
@@ -109,10 +88,10 @@ class PerlinNoise:
 
         coordinates = list(map(lambda x: x*self.octaves, coordinates))
         try:
-            coor_bounding_box = [[math.floor(c), math.floor(c+1)] for c in coordinates]
+            coor_bounding_box = [(math.floor(c), math.floor(c+1)) for c in coordinates]
         except TypeError:
             raise TypeError(f'''could execute math.floor to passed coordinated,
-                                expected int or float, reveived {coordinates[0]}''')
+                                expected int or float, reveived {type(coordinates[0])}''')
 
         val = 0
         for coors in self._each_with_each(coor_bounding_box):
