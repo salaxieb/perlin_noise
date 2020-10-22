@@ -22,17 +22,11 @@ Usage examples:
 import matplotlib.pyplot as plt
 from perlin_noise import PerlinNoise
 
-noise = PerlinNoise(octaves=3)
-xpix = 100
-ypix = 100
-pic = []
-for i in range(xpix):
-    row = []
-    for j in range(ypix):
-        row.append(noise([i/xpix, j/ypix]))
-    pic.append(row)
+noise = PerlinNoise(octaves=10, seed=1)
+xpix, ypix = 100, 100
+pic = [[noise([i/xpix, j/ypix]) for j in range(xpix)] for i in range(ypix)]
 
-plt.imshow(arr, cmap='gray')
+plt.imshow(pic, cmap='gray')
 plt.show()
 ```
 ![png](https://raw.githubusercontent.com/salaxieb/perlin_noise/master/pics/output_4_0.png)
@@ -46,8 +40,7 @@ noise2 = PerlinNoise(octaves=6)
 noise3 = PerlinNoise(octaves=12)
 noise4 = PerlinNoise(octaves=24)
 
-xpix = 100
-ypix = 100
+xpix, ypix = 100, 100
 pic = []
 for i in range(xpix):
     row = []
