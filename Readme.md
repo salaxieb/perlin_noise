@@ -17,7 +17,7 @@ noise([0.5, 0.5]) == noise([0.5, 0.5, 0, 0, 0])
 # --> True
 ```
 
-Visualization examples:
+Usage examples:
 ```python
 import matplotlib.pyplot as plt
 from perlin_noise import PerlinNoise
