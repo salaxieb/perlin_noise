@@ -3,7 +3,7 @@ read more https://en.wikipedia.org/wiki/Perlin_noise
 
 
 noise = PerlinNoise(octaves=3.5, seed=777)  
- &nbsp;&nbsp;&nbsp;&nbsp;octaves : number of sub rectangles in each [0, 1] range
+ &nbsp;&nbsp;&nbsp;&nbsp;octaves : number of sub rectangles in each [0, 1] range  
  &nbsp;&nbsp;&nbsp;&nbsp;seed : specific seed with which you want to initialize random generator  
 
 
@@ -11,10 +11,10 @@ noise = PerlinNoise(octaves=3.5, seed=777)
 noise = PerlinNoise()
 # accepts as argument intenger and list
 noise(0.5) == noise([0.5])
---> True
+# --> True
 # noise not limited in space dimension and seamless in any space size
 noise([0.5, 0.5]) == noise([0.5, 0.5, 0, 0, 0])
---> True
+# --> True
 ```
 
 Visualization examples:
