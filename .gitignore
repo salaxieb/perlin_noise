@@ -8,3 +8,5 @@ setup.cfg
 /perlin_noise/__pycache__/
 perlin.ipynb
 /.ipynb_checkpoints/
+
+.python-version

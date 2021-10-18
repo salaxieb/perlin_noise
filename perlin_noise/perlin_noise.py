@@ -1,105 +1,82 @@
-import math, random
-from .RandVec import RandVec
+"""Perlin Noise calculating lib."""
+import math
+import random
+from collections import Iterable
+from typing import Optional, Union
 
-class PerlinNoise:
-    """
-    Smooth random noise generator
+from perlin_noise.rand_vec import RandVec
+from perlin_noise.tools import each_with_each, hasher
+
+
+class PerlinNoise(object):
+    """Smooth random noise generator.
+
     read more https://en.wikipedia.org/wiki/Perlin_noise
     """
-    def __init__(self, octaves=1, seed=None):
-        """
-            Perlin Noise object initialisation class
+
+    def __init__(self, octaves: float = 1, seed: Optional[int] = None):
+        """Perlin Noise object initialization class.
+
             ex.: noise = PerlinNoise(n_dims=2, octaves=3.5, seed=777)
-            octaves : positive float, obtional, default = 1
+
+        Parameters:
+            octaves : optional positive float, default = 1
                 positive number of sub rectangles in each [0, 1] range
-            seed : positive int, optional, default = None
-                specific seed with which you want to initialize random generator
-        """
+            seed : optional positive int, default = None
+                specified seed
 
-        try:
-            assert octaves > 0
-        except AssertionError:
-            raise ValueError(f'octaves expected to be positive number, but you passed: {octaves}')
-
-        try:
-            if not seed is None:
-                assert type(seed) == int and seed > 0
-        except AssertionError:
-            raise ValueError(f'seed expected to be positive integer number, but you passed: {seed}')
-
-        self.octaves = octaves
-        if seed:
-            self.seed = seed
-        else:
-            self.seed = random.randint(1, 10^5)
-
-    def _hasher(self, coors):
+        Raises:
+            ValueError: if seed is negative
         """
-        hashes coordinates to integer number to avoid repeats in seed
-        coors - array of coordinates
-        """
-        return max(1, abs(RandVec._dot([10**p for p in range(len(coors))], coors)+1))
+        if octaves <= 0:
+            raise ValueError('octaves expected to be positive number')
 
-    @staticmethod
-    def _is_iterable(obj):
-        """ checks is given object iterable """
-        try:
-            iter(obj)
-        except Exception:
-            return False
-        else:
-            return True
+        if seed is not None and not isinstance(seed, int) and seed <= 0:
+            raise ValueError('seed expected to be positive integer number')
 
-    def _is_valid_coordinates(self, coordinates):
-        """
-        internal function that checks if given coordinates are valid
-        """
-        if type(coordinates) == int or type(coordinates) == float:
-            return
-        else:
-            if not self._is_iterable(coordinates):
-                raise TypeError(f'''
-                                coordinates must be iterable (np.array, list, map ..)
-                                but you passed not iterable coordinates of type {type(coordinates)}''')
+        self.octaves: float = octaves
+        self.seed: int = seed if seed else random.randint(1, 10 ^ 5)  # noqa: S311, E501
 
-    @staticmethod
-    def _each_with_each(arrs, prev=(), results=[]):
-        """
-            creates iterable for given array of arrays
-            where each value connected
-            with each value from each array
-        """
-        for el in arrs[0]:
-            new = prev + (el,)
-            if len(arrs) == 1:
-                yield new
-            else:
-                yield from PerlinNoise._each_with_each(arrs[1:], prev=new, results=results)
+    def __call__(self, coordinates: Union[int, float, Iterable]) -> float:
+        """Forward request to noise function.
 
-    def noise(self, coordinates):
-        """
-        basic function that returns noise value for given coordinates
-        coordinates - integer or list of coordinates
-        """
-        self._is_valid_coordinates(coordinates)
+        Parameters:
+            coordinates: float or list of coordinates
 
-        if type(coordinates) == int or type(coordinates) == float:
+        Returns:
+            noise_value
+        """
+        return self.noise(coordinates)
+
+    def noise(self, coordinates: Union[int, float, Iterable]) -> float:
+        """Get perlin noise value for given coordinates.
+
+        Parameters:
+            coordinates: float or list of coordinates
+
+        Returns:
+            noise_value
+
+        Raises:
+            TypeError: if coordinates is not valid type
+        """
+        if not isinstance(coordinates, (int, float, Iterable)):
+            raise TypeError('coordinates must be int, float or iterable')
+
+        if isinstance(coordinates, (int, float)):
             coordinates = [coordinates]
 
-        coordinates = list(map(lambda x: x*self.octaves, coordinates))
-        try:
-            coor_bounding_box = [(math.floor(c), math.floor(c+1)) for c in coordinates]
-        except TypeError:
-            raise TypeError(f'''could execute math.floor to passed coordinated,
-                                expected int or float, reveived {type(coordinates[0])}''')
+        coordinates = list(
+            map(lambda coordinate: coordinate * self.octaves, coordinates),
+        )
 
-        val = 0
-        for coors in self._each_with_each(coor_bounding_box):
-            h = self._hasher(coors)
-            seed = self.seed * h
-            val += RandVec(coors, seed).get_weighted_val(coordinates)
-        return val
-
-    def __call__(self, coordinates):
-        """ forward request to noise function """
-        return self.noise(coordinates)
+        coor_bounding_box = [
+            (math.floor(coordinate), math.floor(coordinate+1))
+            for coordinate in coordinates
+        ]
+        return sum([
+            RandVec(
+                coors, self.seed * hasher(coors),
+            ).get_weighted_val(coordinates)
+            for coors in each_with_each(coor_bounding_box)
+        ])
