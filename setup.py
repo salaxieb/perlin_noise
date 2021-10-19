@@ -7,7 +7,7 @@ except FileNotFoundError:
     long_description = "Perlin Noise Generator"
 
 setup(name='perlin_noise',
-      version='1.6',
+      version='1.8',
       description='Python implementation for Perlin Noise with unlimited coordinates space',
       author="salaxieb",
       author_email='salaxieb.ildar@gmail.com',
