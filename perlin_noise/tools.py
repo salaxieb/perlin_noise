@@ -79,7 +79,7 @@ def hasher(coors: Tuple[int]) -> int:
             dot(
                 [10 ** coordinate for coordinate in range(len(coors))],
                 coors,
-                ) + 1,
+            ) + 1,
         )),
     )
 

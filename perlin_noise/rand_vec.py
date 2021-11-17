@@ -31,7 +31,7 @@ class RandVec(object):
         return tuple(
             coor1 - coor2
             for coor1, coor2 in zip(coordinates, self.coordinates)
-            )
+        )
 
     def weight_to(self, coordinates: List[float]) -> float:
         """Calculate this vector weights to given coordinates.
@@ -44,7 +44,7 @@ class RandVec(object):
         """
         weighted_dists = list(
             map(
-                lambda dist: fade(1-abs(dist)),
+                lambda dist: fade(1 - abs(dist)),
                 self.dists_to(coordinates),
             ))
 
@@ -61,4 +61,4 @@ class RandVec(object):
         """
         return self.weight_to(coordinates) * dot(
             self.vec, self.dists_to(coordinates),
-            )
+        )

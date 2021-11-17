@@ -3,4 +3,4 @@ test:
 
 lint:
 	@mypy perlin_noise
-	@flake8 perlin_noise
+	@flake8 perlin_noise --ignore WPS412

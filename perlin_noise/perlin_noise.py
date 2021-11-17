@@ -71,7 +71,7 @@ class PerlinNoise(object):
         )
 
         coor_bounding_box = [
-            (math.floor(coordinate), math.floor(coordinate+1))
+            (math.floor(coordinate), math.floor(coordinate + 1))
             for coordinate in coordinates
         ]
         return sum([
