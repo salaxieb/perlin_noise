@@ -9,6 +9,8 @@ noise = PerlinNoise(octaves=3.5, seed=777)
 
 ```python
 from perlin_noise import PerlinNoise
+
+
 noise = PerlinNoise()
 # accepts as argument intenger and list
 noise(0.5) == noise([0.5])
