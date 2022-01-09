@@ -1,7 +1,7 @@
 """Perlin Noise calculating lib."""
 import math
 import random
-from collections import Iterable
+from collections.abc import Iterable
 from typing import Optional, Union
 
 from perlin_noise.rand_vec import RandVec

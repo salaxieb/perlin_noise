@@ -1,0 +1,13 @@
+# required for tox
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "perlin_noise"
+version = "1.10"
+description = "Python implementation for Perlin Noise with unlimited coordinates space"
+authors = ["salaxieb <salaxieb.ildar@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.6.2,<=3.10"

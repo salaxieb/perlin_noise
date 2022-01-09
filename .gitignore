@@ -2,11 +2,11 @@
 /perlin_noise.egg-info/
 setup.cfg
 /ENV/
-/__pycache__/
-/tests/__pycache__/
+/**/__pycache__/
 /.pytest_cache/
-/perlin_noise/__pycache__/
 perlin.ipynb
-/.ipynb_checkpoints/
 
-.python-version
+/.ipynb_checkpoints/
+/.tox
+/.venv
+/.mypy_cache
