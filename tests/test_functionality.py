@@ -42,3 +42,8 @@ def test_noise_value_doesnt_depend_on_space_size():
     assert noise([0.5, 0.5]) == noise([0.5, 0.5, 0, 0])
     assert noise([0.5, 0]) == noise([0.5, 0, 0, 0, 0])
     assert noise(0.5) == noise([0.5, 0])
+
+
+def test_that_dist_in_0_1_range():
+    noise = PerlinNoise(octaves = 20.496, seed = 1337)
+    assert noise([125/1281, 1152/1281])
