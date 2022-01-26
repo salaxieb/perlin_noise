@@ -35,7 +35,7 @@ class PerlinNoise(object):
             raise ValueError('seed expected to be positive integer number')
 
         self.octaves: float = octaves
-        self.seed: int = seed if seed else random.randint(1, 10 ^ 5)  # noqa: S311, E501
+        self.seed: int = seed if seed else random.randint(1, 10**5)  # noqa: S311, E501
 
     def __call__(self, coordinates: Union[int, float, Iterable]) -> float:
         """Forward request to noise function.
