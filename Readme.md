@@ -12,7 +12,7 @@ from perlin_noise import PerlinNoise
 
 
 noise = PerlinNoise()
-# accepts as argument intenger and list
+# accepts as argument float and/or list[float]
 noise(0.5) == noise([0.5])
 # --> True
 # noise not limited in space dimension and seamless in any space size

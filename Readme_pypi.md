@@ -1,6 +1,8 @@
 Smooth random noise generator  
 read more https://en.wikipedia.org/wiki/Perlin_noise  
 
+source code: https://github.com/salaxieb/perlin_noise
+
 
 noise = PerlinNoise(octaves=3.5, seed=777)  
  &nbsp;&nbsp;&nbsp;&nbsp;octaves : number of sub rectangles in each [0, 1] range  
@@ -12,7 +14,7 @@ from perlin_noise import PerlinNoise
 
 
 noise = PerlinNoise()
-# accepts as argument intenger and list
+# accepts as argument float and/or list[float]
 noise(0.5) == noise([0.5])
 --> True
 # noise not limited in space dimension and seamless in any space size
