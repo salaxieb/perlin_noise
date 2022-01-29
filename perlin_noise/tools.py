@@ -57,10 +57,10 @@ def fade(given_value: float) -> float:
         smoothed [0, 1] value
 
     Raises:
-        ValueError: if input not in [0, 1]
+        ValueError: if input not in [-0.1, 1.1]
     """
     if given_value < -0.1 or given_value > 1.1:  # noqa: WPS459, WPS432
-        raise ValueError('expected to have value in [0, 1]')
+        raise ValueError('expected to have value in [-0.1, 1.1]')
     return 6 * math.pow(given_value, 5) - 15 * math.pow(given_value, 4) + 10 * math.pow(given_value, 3)  # noqa: WPS221, WPS432, E501
 
 
