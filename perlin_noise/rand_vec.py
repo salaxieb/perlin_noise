@@ -44,7 +44,7 @@ class RandVec(object):
         """
         weighted_dists = list(
             map(
-                lambda dist: fade(1 - min(1, abs(dist))),
+                lambda dist: fade(1 - abs(dist)),
                 self.dists_to(coordinates),
             ))
 
