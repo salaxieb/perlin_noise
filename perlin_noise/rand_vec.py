@@ -50,7 +50,7 @@ class RandVec(object):
 
         return product(weighted_dists)
 
-    def get_weighted_val(self, coordinates: List[float]) -> float:
+    def get_weighted_val(self, coordinates: Tuple[float]) -> float:
         """Calculate weighted contribution of this vec to final result.
 
         Parameters:

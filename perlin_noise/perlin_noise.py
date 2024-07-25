@@ -3,9 +3,10 @@ import math
 import random
 from collections.abc import Iterable
 from typing import Dict, Optional, Tuple, Union
+import itertools
 
 from perlin_noise.rand_vec import RandVec
-from perlin_noise.tools import each_with_each, hasher
+from perlin_noise.tools import hasher
 
 
 class PerlinNoise(object):
@@ -76,9 +77,8 @@ class PerlinNoise(object):
             for coordinate in coordinates
         ]
         return sum([
-            self.get_from_cache_of_create_new(coors).
-            get_weighted_val(coordinates)
-            for coors in each_with_each(coor_bounding_box)
+            self.get_from_cache_of_create_new(coors).get_weighted_val(coordinates)
+            for coors in itertools.product(*coor_bounding_box)
         ])
 
     def get_from_cache_of_create_new(self, coors):
