@@ -96,26 +96,3 @@ def product(iterable: Union[List, Tuple]) -> float:
     if len(iterable) == 1:
         return iterable[0]
     return iterable[0] * product(iterable[1:])
-
-
-def each_with_each(
-    arrays: List[Tuple[int, int]],
-    prev=(),
-) -> Generator[Tuple[int], None, None]:
-    """Create iterable for given array of arrays.
-
-    Each value connected in array with with each value from other arrays
-
-    Parameters:
-        arrays: list of lists to make mixing
-        prev: value accumulating values from previous arrays
-
-    Yields:
-        generator with elements
-    """
-    for el in arrays[0]:
-        new = prev + (el,)
-        if len(arrays) == 1:
-            yield new
-        else:
-            yield from each_with_each(arrays[1:], prev=new)
