@@ -2,7 +2,7 @@
 
 import math
 import random
-from typing import Generator, List, Tuple, Union
+from typing import Generator, List, Tuple, Union, Optional, Iterable
 
 
 def dot(
@@ -64,15 +64,18 @@ def fade(given_value: float) -> float:
     return 6 * math.pow(given_value, 5) - 15 * math.pow(given_value, 4) + 10 * math.pow(given_value, 3)  # noqa: WPS221, WPS432, E501
 
 
-def hasher(coors: Tuple[int]) -> int:
+def hasher(coors: Tuple[int, ...], tile_sizes: Optional[Tuple[int, ...]] = None) -> int:
     """Hashes coordinates to integer number and use obtained number as seed.
 
     Parameters:
-        coors: List[int] - array of coordinates
+        coors: Tuple[int] - tuple of coordinates
 
     Returns:
         hash of coordinates in integer
     """
+    if tile_sizes:
+        coors = tuple([coordinate % tile for coordinate, tile in zip(coors, tile_sizes)])
+
     return max(
         1,
         int(abs(
