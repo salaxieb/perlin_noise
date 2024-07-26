@@ -1,4 +1,5 @@
 /dist/
+/build/
 /perlin_noise.egg-info/
 setup.cfg
 /ENV/
