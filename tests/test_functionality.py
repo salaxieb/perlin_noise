@@ -64,9 +64,9 @@ def test_tiles_seamless():
     prev = 0
     x_lim, y_lim = 5, 10
     for i in range(0, lim, 100):
-        prev = p_noise([x_lim * i / lim, 0], tile_sizes=(2, 3))
+        prev = p_noise([x_lim * i / lim, 0], tile_sizes=[2, 3])
         for j in range(lim):
-            noise = p_noise([x_lim * i / lim, y_lim * j / lim], tile_sizes=(2, 3))
+            noise = p_noise([x_lim * i / lim, y_lim * j / lim], tile_sizes=[2, 3])
             assert -1 < noise < 1
             assert 0 <= abs(noise - prev) < 0.1
             prev = noise

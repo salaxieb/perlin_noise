@@ -83,13 +83,13 @@ class PerlinNoise:
             coordinates = list(coordinates)
 
         if tile_sizes is not None:
+            if isinstance(tile_sizes, int):
+                tile_sizes = [tile_sizes]
             # fmt: off
-            if not isinstance(tile_sizes, int) or (isinstance(tile_sizes, (tuple, list)) and all(isinstance(tile, int) for tile in tile_sizes)):  # noqa: E501, WPS221
+            if not all(isinstance(tile, int) for tile in tile_sizes):
                 raise TypeError("tile_sizes must be int or list of int")
             # fmt: on
 
-            if isinstance(tile_sizes, int):
-                tile_sizes = [tile_sizes]
             if len(tile_sizes) != len(coordinates):
                 raise ValueError("tile_sizes must have same length as coordinates")
 

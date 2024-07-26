@@ -10,7 +10,7 @@ description = "Python implementation for Perlin Noise with unlimited coordinates
 authors = ["salaxieb <salaxieb.ildar@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = ">=3.6.2,<=3.12"
+python = ">=3.9,<3.13"
 
 
 [tool.poetry.group.dev.dependencies]
