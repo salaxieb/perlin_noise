@@ -90,13 +90,13 @@ plt.show()
 import matplotlib.pyplot as plt
 from perlin_noise import PerlinNoise
 
-noise1 = PerlinNoise(octaves=3)
-noise2 = PerlinNoise(octaves=6)
-noise3 = PerlinNoise(octaves=12)
-noise4 = PerlinNoise(octaves=24)
+noise1 = PerlinNoise(octaves=1)
+noise2 = PerlinNoise(octaves=3)
+noise3 = PerlinNoise(octaves=6)
+noise4 = PerlinNoise(octaves=12)
 
 xpix, ypix = 800, 1200
-lim_x, lim_y = 6, 9
+lim_x, lim_y = 4, 6
 tile_sizes = (2, 3)
 pic = []
 for i in range(ypix):
@@ -115,3 +115,25 @@ plt.savefig("pics/multy_noise_tiled.png", transparent=True)
 plt.show()
 ```
 ![png](pics/multy_noise_tiled.png)
+
+for tiles to work correctly, number of octaves **MUST** be integer
+```python
+import matplotlib.pyplot as plt
+from perlin_noise import PerlinNoise
+
+noise = PerlinNoise(octaves=2.5, seed=42)
+xpix, ypix = 800, 1200
+lim_x, lim_y = 6, 9
+pic = [
+    [
+        noise([lim_x * i / xpix, lim_y * j / ypix], tile_sizes=(2, 3))
+        for j in range(xpix)
+    ]
+    for i in range(ypix)
+]
+
+plt.imshow(pic, cmap="gray")
+plt.savefig('pics/tiled_with_step.png', transparent=True)
+plt.show()
+```
+![png](pics/tiled_with_step.png)
