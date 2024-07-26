@@ -2,6 +2,6 @@
 
 from perlin_noise.perlin_noise import PerlinNoise
 
-__all__ = [  # noqa: WPS410
+__all__ = [
     "PerlinNoise",
 ]
