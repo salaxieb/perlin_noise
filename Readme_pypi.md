@@ -6,7 +6,8 @@ source code: https://github.com/salaxieb/perlin_noise
 
 noise = PerlinNoise(octaves=3.5, seed=777)  
  &nbsp;&nbsp;&nbsp;&nbsp;octaves : number of sub rectangles in each [0, 1] range  
- &nbsp;&nbsp;&nbsp;&nbsp;seed : specific seed with which you want to initialize random generator  
+ &nbsp;&nbsp;&nbsp;&nbsp;seed : specific seed with which you want to initialize random generator
+ &nbsp;&nbsp;&nbsp;&nbsp;tile_sizes : tuple of ints of you want to noise seamlessly repeat itself  
 
 
 ```python
@@ -16,10 +17,13 @@ from perlin_noise import PerlinNoise
 noise = PerlinNoise()
 # accepts as argument float and/or list[float]
 noise(0.5) == noise([0.5])
---> True
+# --> True
 # noise not limited in space dimension and seamless in any space size
 noise([0.5, 0.5]) == noise([0.5, 0.5, 0, 0, 0])
---> True
+# --> True
+# noise can seamlessly repeat isself
+noise([0.5, 0.5], tile_sizes=[2, 5]) == noise([2.5, 5.5], tile_sizes=[2, 5])
+# --> True
 ```
 
 Usage examples:
@@ -63,3 +67,79 @@ plt.show()
 ```
 
 ![png](https://raw.githubusercontent.com/salaxieb/perlin_noise/master/pics/output_5_0.png)
+
+
+Library has a possibility to generate repetative random noise with custom tile sizes:
+
+```python
+import matplotlib.pyplot as plt
+from perlin_noise import PerlinNoise
+
+noise = PerlinNoise(octaves=2, seed=42)
+xpix, ypix = 800, 1200
+lim_x, lim_y = 6, 9
+pic = [
+    [
+        noise([lim_x * i / xpix, lim_y * j / ypix], tile_sizes=[2, 3])
+        for j in range(xpix)
+    ]
+    for i in range(ypix)
+]
+
+plt.imshow(pic, cmap="gray")
+plt.show()
+```
+
+![png](https://github.com/salaxieb/perlin_noise/raw/master/pics/smooth_tiled.png)
+
+```python
+import matplotlib.pyplot as plt
+from perlin_noise import PerlinNoise
+
+noise1 = PerlinNoise(octaves=1)
+noise2 = PerlinNoise(octaves=3)
+noise3 = PerlinNoise(octaves=6)
+noise4 = PerlinNoise(octaves=12)
+
+xpix, ypix = 800, 1200
+lim_x, lim_y = 4, 6
+tile_sizes = (2, 3)
+pic = []
+for i in range(ypix):
+    row = []
+    for j in range(xpix):
+        noise_val = noise1([lim_x * i / xpix, lim_y * j / ypix], tile_sizes)
+        noise_val += 0.5 * noise2([lim_x * i / xpix, lim_y * j / ypix], tile_sizes)
+        noise_val += 0.25 * noise3([lim_x * i / xpix, lim_y * j / ypix], tile_sizes)
+        noise_val += 0.125 * noise4([lim_x * i / xpix, lim_y * j / ypix], tile_sizes)
+
+        row.append(noise_val)
+    pic.append(row)
+
+plt.imshow(pic, cmap="gray")
+plt.savefig("pics/multy_noise_tiled.png", transparent=True)
+plt.show()
+```
+![png](https://github.com/salaxieb/perlin_noise/raw/master/pics/multy_noise_tiled.png)
+
+for tiles to work correctly, number of octaves **MUST** be integer
+```python
+import matplotlib.pyplot as plt
+from perlin_noise import PerlinNoise
+
+noise = PerlinNoise(octaves=2.5, seed=42)
+xpix, ypix = 800, 1200
+lim_x, lim_y = 6, 9
+pic = [
+    [
+        noise([lim_x * i / xpix, lim_y * j / ypix], tile_sizes=(2, 3))
+        for j in range(xpix)
+    ]
+    for i in range(ypix)
+]
+
+plt.imshow(pic, cmap="gray")
+plt.savefig('pics/tiled_with_step.png', transparent=True)
+plt.show()
+```
+![png](https://github.com/salaxieb/perlin_noise/raw/master/pics/tiled_with_step.png)

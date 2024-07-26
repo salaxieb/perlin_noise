@@ -3,11 +3,56 @@
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.tox]
+legacy_tox_ini = """
+    [tox]
+    isolated_build = true
+    envlist = py{3.9,3.10,3.11,3.12}
+
+    [testenv]
+    allowlist_externals = poetry
+                          make
+    commands =
+        poetry install
+        make lint
+        make test
+"""
+
 [tool.poetry]
 name = "perlin_noise"
-version = "1.10"
+version = "1.13"
 description = "Python implementation for Perlin Noise with unlimited coordinates space"
 authors = ["salaxieb <salaxieb.ildar@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = ">=3.6.2,<=3.10"
+python = ">=3.9,<3.13"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.11.0"
+pytest = "^8.3.2"
+black = "^24.4.2"
+wemake-python-styleguide = "^0.19.2"
+flake8-pyproject = "^1.2.3"
+tox = "^4.16.0"
+
+
+#[tool.tox]
+#requires = ["tox-poetry"]
+#isolated_build = true
+#envlist = ["py3.9","py3.10"]
+
+#[tool.tox.testenv]
+#allowlist_externals = ["poetry", "make"]
+#commands =["poetry install", "make lint", "make test"]
+
+[tool.isort]
+profile = "black"
+
+[tool.flake8]
+exclude = [".venv"]
+count = true
+max-line-length = 88  # black line width is 88
+ignore = [
+    "WPS412",  # Found `__init__.py` module with logic
+    "Q000",  # Double quotes found but single quotes preferred
+]

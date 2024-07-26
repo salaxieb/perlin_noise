@@ -2,8 +2,9 @@ test:
 	@python -m pytest
 
 lint:
-	@mypy perlin_noise
-	@flake8 perlin_noise --ignore WPS412 # Found `__init__.py` module with logic
+	@poetry run black perlin_noise --check
+	@poetry run mypy perlin_noise
+	@poetry run flake8p perlin_noise --toml-config ./pyproject.toml
 
 tox:
 	@tox

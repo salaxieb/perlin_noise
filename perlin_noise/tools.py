@@ -2,7 +2,7 @@
 
 import math
 import random
-from typing import Generator, List, Tuple, Union, Optional, Iterable
+from typing import List, Optional, Tuple, Union
 
 
 def dot(
@@ -22,7 +22,7 @@ def dot(
         ValueError: if length not equal
     """
     if len(vec1) != len(vec2):
-        raise ValueError('lengths of two vectors are not equal')
+        raise ValueError("lengths of two vectors are not equal")
     return sum([val1 * val2 for val1, val2 in zip(vec1, vec2)])
 
 
@@ -60,31 +60,41 @@ def fade(given_value: float) -> float:
         ValueError: if input not in [-0.1, 1.1]
     """
     if given_value < -0.1 or given_value > 1.1:  # noqa: WPS459, WPS432
-        raise ValueError('expected to have value in [-0.1, 1.1]')
-    return 6 * math.pow(given_value, 5) - 15 * math.pow(given_value, 4) + 10 * math.pow(given_value, 3)  # noqa: WPS221, WPS432, E501
+        raise ValueError("expected to have value in [-0.1, 1.1]")
+    return (
+        6 * math.pow(given_value, 5)  # noqa: WPS432
+        - 15 * math.pow(given_value, 4)  # noqa: WPS432, W503
+        + 10 * math.pow(given_value, 3)  # noqa: WPS432, W503
+    )
 
 
-def hasher(coors: Tuple[int, ...], tile_sizes: Optional[Tuple[int, ...]] = None) -> int:
+def hasher(
+    coordinates: Tuple[int, ...],
+    tile_sizes: Optional[Tuple[int, ...]] = None,
+) -> int:
     """Hashes coordinates to integer number and use obtained number as seed.
 
     Parameters:
-        coors: Tuple[int] - tuple of coordinates
+        coordinates: Tuple[int, ...] - tuple of coordinates
+        tile_sizes: Optional[Tuple[int, ...]] - optional tile sizes
 
     Returns:
         hash of coordinates in integer
     """
     if tile_sizes:
-        coors = tuple([coordinate % tile for coordinate, tile in zip(coors, tile_sizes)])
-
+        coordinates = tuple(
+            coors % tile for coors, tile in zip(coordinates, tile_sizes)
+        )
+    # fmt: off
     return max(
         1,
-        int(abs(
-            dot(
-                [10 ** coordinate for coordinate in range(len(coors))],
-                coors,
-            ) + 1,
-        )),
+        int(
+            abs(
+                dot([10**coordinate for coordinate in range(len(coordinates))], coordinates) + 1,  # noqa: E501, WPS221
+            ),
+        ),
     )
+    # fmt: on
 
 
 def product(iterable: Union[List, Tuple]) -> float:

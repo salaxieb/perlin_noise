@@ -4,7 +4,8 @@ read more https://en.wikipedia.org/wiki/Perlin_noise
 
 noise = PerlinNoise(octaves=3.5, seed=777)  
  &nbsp;&nbsp;&nbsp;&nbsp;octaves : number of sub rectangles in each [0, 1] range  
- &nbsp;&nbsp;&nbsp;&nbsp;seed : specific seed with which you want to initialize random generator  
+ &nbsp;&nbsp;&nbsp;&nbsp;seed : specific seed with which you want to initialize random generator
+ &nbsp;&nbsp;&nbsp;&nbsp;tile_sizes : tuple of ints of you want to noise seamlessly repeat itself  
 
 
 ```python
@@ -17,6 +18,9 @@ noise(0.5) == noise([0.5])
 # --> True
 # noise not limited in space dimension and seamless in any space size
 noise([0.5, 0.5]) == noise([0.5, 0.5, 0, 0, 0])
+# --> True
+# noise can seamlessly repeat isself
+noise([0.5, 0.5], tile_sizes=[2, 5]) == noise([2.5, 5.5], tile_sizes=[2, 5])
 # --> True
 ```
 

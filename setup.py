@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 try:
     with open("Readme_pypi.md", "r") as fh:
@@ -6,17 +6,19 @@ try:
 except FileNotFoundError:
     long_description = "Perlin Noise Generator"
 
-setup(name='perlin_noise',
-      version='1.12',
-      description='Python implementation for Perlin Noise with unlimited coordinates space',
-      author="salaxieb",
-      author_email='salaxieb.ildar@gmail.com',
-      long_description=long_description,
-      long_description_content_type="text/markdown",
-      packages=find_packages(include=['perlin_noise']),
-      classifiers=[
-          "Programming Language :: Python :: 3",
-          "License :: OSI Approved :: MIT License",
-          "Operating System :: OS Independent",
-      ],
-      zip_safe=False)
+setup(
+    name="perlin_noise",
+    version="1.13",
+    description="Python implementation for Perlin Noise with unlimited coordinates space",
+    author="salaxieb",
+    author_email="salaxieb.ildar@gmail.com",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    packages=find_packages(include=["perlin_noise"]),
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
+    zip_safe=False,
+)
