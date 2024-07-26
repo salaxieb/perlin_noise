@@ -976,5 +976,5 @@ typing_extensions = ">=4.0,<5.0"
 
 [metadata]
 lock-version = "2.0"
-python-versions = ">=3.9,<=3.12.4"
-content-hash = "8db360c2b9389046ef8510f9bd51ff0b1a77405c435e01a60cc2d9ee4de99a24"
+python-versions = ">=3.9,<3.13"
+content-hash = "61132626e31598a5ba05f58dc04f01eddbd6420334d7e3c147d5dd54dc62a401"
