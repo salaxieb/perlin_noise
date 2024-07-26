@@ -5,6 +5,7 @@ setup.cfg
 /**/__pycache__/
 /.pytest_cache/
 perlin.ipynb
+.DS_Store
 
 /.ipynb_checkpoints/
 /.tox
