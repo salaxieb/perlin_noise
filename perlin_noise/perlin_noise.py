@@ -4,7 +4,7 @@ import itertools
 import math
 import random
 from functools import lru_cache
-from typing import Dict, List, Optional, Tuple, Union
+from typing import Dict, Iterable, List, Optional, Tuple, Union
 
 from perlin_noise.rand_vec import RandVec
 from perlin_noise.tools import hasher
@@ -58,7 +58,7 @@ class PerlinNoise:
 
     def noise(  # noqa: WPS231
         self,
-        coordinates: Union[int, float, List, Tuple],
+        coordinates: Union[int, float, List, Tuple, Iterable],
         tile_sizes: Optional[Union[int, List, Tuple]] = None,
     ) -> float:
         """Get perlin noise value for given coordinates.

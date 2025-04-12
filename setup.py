@@ -8,7 +8,7 @@ except FileNotFoundError:
 
 setup(
     name="perlin_noise",
-    version="1.13",
+    version="1.14",
     description="Python implementation for Perlin Noise with unlimited coordinates space",
     author="salaxieb",
     author_email="salaxieb.ildar@gmail.com",

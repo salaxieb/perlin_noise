@@ -20,7 +20,7 @@ legacy_tox_ini = """
 
 [tool.poetry]
 name = "perlin_noise"
-version = "1.13"
+version = "1.14"
 description = "Python implementation for Perlin Noise with unlimited coordinates space"
 authors = ["salaxieb <salaxieb.ildar@gmail.com>"]
 
@@ -34,16 +34,6 @@ black = "^24.4.2"
 wemake-python-styleguide = "^0.19.2"
 flake8-pyproject = "^1.2.3"
 tox = "^4.16.0"
-
-
-#[tool.tox]
-#requires = ["tox-poetry"]
-#isolated_build = true
-#envlist = ["py3.9","py3.10"]
-
-#[tool.tox.testenv]
-#allowlist_externals = ["poetry", "make"]
-#commands =["poetry install", "make lint", "make test"]
 
 [tool.isort]
 profile = "black"
